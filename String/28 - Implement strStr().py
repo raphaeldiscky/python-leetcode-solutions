@@ -10,20 +10,18 @@ class Solution:
         Time complexity: O(m). Space complexity: O(1), where
         m is the length of the needle, space used for lps array isn't included.
         """
-        m = len(needle)
-        lps_array = [0]*m  # [0,0,...,n]
+        lps_array = [0]*len(needle)  # [0,0,...,n]
         i, j = 1, 0  # start from the 2nd character in needle
-        while i < m:
+        while i < len(needle):
             if needle[i] == needle[j]:
                 lps_array[i] = j + 1
                 j += 1
                 i += 1
+            elif j > 0:
+                j = lps_array[j-1]
             else:
-                if j > 0:
-                    j = lps_array[j-1]
-                else:
-                    lps_array[i] = 0
-                    i += 1
+                lps_array[i] = 0
+                i += 1
         return lps_array
 
     def strStr(self, haystack: str, needle: str) -> int:
@@ -33,10 +31,10 @@ class Solution:
         Time complexity: O(n + m). Space complexity: O(m).
         """
         # special case
-        if not haystack and not needle:
+        if not needle:
             return 0
-        elif not needle:
-            return 0
+        if not haystack or len(haystack) < len(needle):
+            return -1
 
         # build longest proper suffix array for pattern
         lps_array = self.build_lps(needle)
@@ -47,13 +45,12 @@ class Solution:
             if haystack[i] == needle[j]:
                 i += 1
                 j += 1
+            elif j > 0:  # try start with previous longest prefix
+                j = lps_array[j-1]
+            # 1'st charater of needle doesn't match character in haystack
+            # go to next char in haystack
             else:
-                if j > 0:  # try start with previous longest prefix
-                    j = lps_array[j-1]
-                # 1'st charater of needle doesn't match character in haystack
-                # go to next char in haystack
-                else:
-                    i += 1
+                i += 1
             # whole needle matches haystack, match is found
             if j == m:
                 return i - m
@@ -62,7 +59,7 @@ class Solution:
         return -1
 
 
-haystack = "hello"
-needle = "ll"
+haystack = "aaaaa"
+needle = "bba"
 ob1 = Solution()
 print(ob1.strStr(haystack, needle))
