@@ -15,10 +15,12 @@ class Solution:
         prime = [True]*n
         i = 2
         while i*i < n:
+            print("i", i)
             if prime[i]:
                 # update all multiples of i to False
                 for j in range(i*i, n, i):
                     prime[j] = False
+                    print("j", j)
             i += 1
         total = 0
         list = []
