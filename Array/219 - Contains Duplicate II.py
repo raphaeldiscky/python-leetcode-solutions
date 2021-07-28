@@ -3,6 +3,10 @@ from typing import List
 
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        '''
+            Time: O(n) using dict
+            Space: O(n)
+        '''
         dic = {}
         for i, v in enumerate(nums):
             print("i:", i, "v:", v)
