@@ -17,6 +17,10 @@ class Solution:
         return res
 
     def dfs(self, root, ls, res):
+        '''
+            Time: O(n)
+            Space: O(n)
+        '''
         if not root.left and not root.right:
             res.append(ls + str(root.val))
         if root.left:

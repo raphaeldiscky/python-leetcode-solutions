@@ -25,8 +25,23 @@ class Solution:
             return None
         mid = (low + high)//2
         node = TreeNode(nums[mid])
-        # recursively construct the left subtree and make it left child of root
+        # recursively construct the left subtree and make it left child of nums
         node.left = self.helper(nums, low, mid-1)
-        # recursively construct the right subtree and make it right child of root
+        # recursively construct the right subtree and make it right child of nums
         node.right = self.helper(nums, mid+1, high)
         return node
+
+    def preOrder(self, node):
+        if not node:
+            return
+        print(node.val, end=' ')
+        self.preOrder(node.left)
+        self.preOrder(node.right)
+
+
+nums = [-10, -3, 0, 5, 9]
+print("original array:", nums)
+ob = Solution()
+result = ob.sortedArrayToBST(nums)
+print("preoder:")
+ob.preOrder(result)
