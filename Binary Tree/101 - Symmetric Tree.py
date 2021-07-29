@@ -13,12 +13,11 @@ class Solution:
         '''
         if not root:
             return True
-        stack = []
-        stack.append((root.left, root.right))
+        stack = [(root.left, root.right)]
         while stack:
             l, r = stack.pop()
             if not l and not r:
-                return True
+                continue
             if not l or not r:
                 return False
             if l.val != r.val:
