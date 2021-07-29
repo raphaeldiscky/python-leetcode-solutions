@@ -1,5 +1,8 @@
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
+        '''
+            Iterate backwards and build the result from the back by adding two last digits while keeping carry the mind.
+        '''
         carry = 0
         result = ''
         a = list(a)
@@ -20,5 +23,5 @@ class Solution:
 
 ob = Solution()
 a = "11"
-b = "10"
+b = "11"
 print(ob.addBinary(a, b))
