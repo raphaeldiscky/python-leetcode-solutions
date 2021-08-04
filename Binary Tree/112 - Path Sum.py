@@ -27,9 +27,14 @@ class Solution:
                 if not node.left and not node.right and node.val == _targetSum:
                     return True
                 if node.left:
+                    # print("node.left:", node.left.val)
+                    # print("ts:", _targetSum-node.val)
                     stack.append((node.left, _targetSum-node.val))
                 if node.right:
+                    # print("node.rg:", node.right.val)
+                    # print("ts:", _targetSum-node.val)
                     stack.append((node.right, _targetSum-node.val))
+
         return False
 
 
